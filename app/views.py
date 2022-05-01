@@ -115,14 +115,14 @@ def viewBalance(request,pk):
         return Response(status=404)
     if request.method=="GET":
         serializer=ProfileSerializer(profile)
-        a=(serializer.data['balance'])
-        b=(serializer.data['user'])
-        user=User.objects.get(id=b)
+        balance=(serializer.data['balance'])
+        usr=(serializer.data['user'])
+        user=User.objects.get(id=usr)
         username=user.username
         return Response({
-            "user":b,
+            "user":usr,
             "username":username,
-            "balance":a
+            "balance":balance
             })
 
 
@@ -162,9 +162,12 @@ def updateBalance(request):
 def activateWallet(request):
     if request.method=="POST":
         us=User.objects.get(id=(request.data['id']))
-        print(us)
+        if request.data['is_active']==True:
+            msg="Wallet Activated Successfully"
+        else:
+            msg="Wallet Deactivated Successfully"
         profile=Profile.objects.get(user=us)
         profile.is_active=request.data['is_active']
         profile.save()
         serializer=ProfileSerializer(profile)
-        return Response({"msg":"some response","data":serializer.data})
+        return Response({"msg":msg,"data":serializer.data})
