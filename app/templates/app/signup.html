@@ -1,0 +1,28 @@
+{% extends "app/base.html" %}
+{% block body %}
+<br>
+<div class='container mt-5'>
+	<div class='col-6 mx-auto border border-info p-2'>
+
+<h1 class='alert alert-info text-center'>SignUp Form</h1>
+
+<form method="post">
+	{% csrf_token %}
+	<table>
+
+{{form}}
+</table>
+<br>
+<div class="row">
+<div class="col">
+<input class='btn btn-success' type="submit" value='Sign Up'>
+</div>
+<div class="col ">
+Already have an account
+<a class="mr-2" href="/login/" >Login</a>
+</div>
+</form>
+</div>
+</div>
+
+{% endblock %} 
