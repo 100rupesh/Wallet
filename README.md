@@ -15,7 +15,7 @@ Django based app to show the the expenses and income of a user based on the amou
 ### 1. Clone the Project from Git
 ```git clone https://github.com/100rupesh/Wallet.git```
 
-```cd Wallet/transaction```
+```cd Wallet```
 
 ### 2. Install the dependencies
 ```pip install -r requirements.txt```
