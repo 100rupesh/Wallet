@@ -9,6 +9,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import *
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import messages
 # Create your views here.
 
 
@@ -82,7 +83,8 @@ def home(request):
         elif request.method=='POST' and request.POST.get('b'):
             amount=request.POST.get('amount')
             if float(amount)>P.balance:
-                return HttpResponse("Cannot withdraw more then balance limit!")
+                messages.warning(request,"Cannot withdraw more then balance limit!")
+                return redirect("/home/")
             else:
                 E.amount=float(amount)
                 E.exp_type="negative"
@@ -148,7 +150,7 @@ def updateBalance(request):
             expense.user=user
             if request.data["amount"]>profile.balance:
                 return Response({"Msg":"Cannot withdraw more then balance amount!"})
-            expense.amount= -(request.data["amount"])
+            expense.amount= (request.data["amount"])
             expense.exp_type="negative"
             expense.save()
             exp_id=expense.id

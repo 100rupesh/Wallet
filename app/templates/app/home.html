@@ -3,6 +3,7 @@
 
 <h2 class="">Welcome {{user.username}} | Available Funds is {{P}} | UserID : {{user.id}}</h2>
 <br>
+{% include "app/messages.html" %}
 <div class="container">
 <div class="row">
 
@@ -47,6 +48,7 @@
 </thead>
     {% if E %}
     <tbody>
+    
         {% for i in E %}
     <tr>
         <td>{{i.created_at}}</td>
@@ -67,5 +69,8 @@
     {% endif %} 
 </div>
 </div>
+
+
+
 
 {% endblock %}

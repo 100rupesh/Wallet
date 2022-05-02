@@ -12,7 +12,9 @@ class Profile(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     balance=models.FloatField(blank=True,null=True)
     is_active=models.BooleanField(default=False)
-    
+
+    def __str__(self):
+        return str(self.user) 
 
 
 class Expense(models.Model):
@@ -20,3 +22,6 @@ class Expense(models.Model):
     exp_type=models.CharField(max_length=50,choices=TYPE)
     amount=models.FloatField()
     created_at=models.DateTimeField(auto_now_add=True, blank=True)
+
+    def __str__(self):
+        return str(self.user)
