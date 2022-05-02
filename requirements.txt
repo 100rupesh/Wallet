@@ -1,0 +1,6 @@
+attr==0.3.1
+attrs==21.2.0
+Django==3.2.8
+djangorestframework==3.13.1
+itsdangerous==2.0.1
+SQLAlchemy==1.4.31
