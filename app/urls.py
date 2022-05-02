@@ -7,8 +7,10 @@ urlpatterns = [
     path('login/',user_login),
     path('logout/',user_logout),
     path('home/',home),
-    path('balance/<int:pk>/',viewBalance),
-    path('updateBalance/',updateBalance),
-    path('activateWallet/',activateWallet),
+    path('get-user-balance/<int:pk>/',viewBalance),
+    path('update-user-balance/',updateBalance),
+    path('activate-user-wallet/',activateWallet),
     
 ]
+
+

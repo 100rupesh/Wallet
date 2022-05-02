@@ -91,7 +91,7 @@ def home(request):
                 P.save()
                 return redirect('/home/')
 
-    Exp=Expense.objects.filter(user=request.user)
+    Exp=Expense.objects.filter(user=request.user).order_by('-id')
     return render(request,'app/home.html',{"wallet_active":P.is_active,"P":P.balance,"E":Exp})
 
 
@@ -135,19 +135,21 @@ def updateBalance(request):
         print(profile.balance)
         user=User.objects.get(pk=(request.data["user"]))
         print(profile)
-        if (request.data["exp_type"])=="positive":
+        if (request.data["expense_type"])=="income":
             expense.user=user
             expense.amount=request.data["amount"]
+            expense.exp_type="positive"
             expense.save()
             exp_id=expense.id
             profile.balance += request.data["amount"]
             profile.save()
             return Response({"Msg":"Expense Created"})
-        elif (request.data["exp_type"])=="negative":
+        elif (request.data["expense_type"])=="expense":
             expense.user=user
             if request.data["amount"]>profile.balance:
                 return Response({"Msg":"Cannot withdraw more then balance amount!"})
             expense.amount= -(request.data["amount"])
+            expense.exp_type="negative"
             expense.save()
             exp_id=expense.id
             profile.balance -= request.data["amount"]
